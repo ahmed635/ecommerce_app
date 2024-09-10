@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/controller/on_boarding_controller.dart';
-import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:ecommerce_app/data/data_source/static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,26 +16,22 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
         itemCount: onBoardingList.length,
         itemBuilder: (context, i) => Column(
               children: [
-                buildTitleWidget(i),
+                buildTitleWidget(context, i),
                 const SizedBox(height: 80),
                 buildImageWidget(i),
                 const SizedBox(height: 60),
-                buildBodyWidget(i),
+                buildBodyWidget(context, i),
               ],
             ));
   }
 
-  Container buildBodyWidget(int i) {
+  Container buildBodyWidget(BuildContext context, int i) {
     return Container(
         width: double.infinity,
         alignment: Alignment.center,
         child: Text(
           onBoardingList[i].body!,
-          style: TextStyle(
-              height: 2.5,
-              color: AppColor.grey,
-              fontWeight: FontWeight.bold,
-              fontSize: 18),
+          style: Theme.of(context).textTheme.bodyText1,
           textAlign: TextAlign.center,
         ));
   }
@@ -50,10 +45,10 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
     );
   }
 
-  Text buildTitleWidget(int i) {
+  Text buildTitleWidget(BuildContext context, int i) {
     return Text(
       "${onBoardingList[i].title}",
-      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+      style: Theme.of(context).textTheme.headline1,
     );
   }
 }
