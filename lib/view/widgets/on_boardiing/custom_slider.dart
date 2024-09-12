@@ -17,7 +17,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
         itemBuilder: (context, i) => Column(
               children: [
                 buildTitleWidget(context, i),
-                const SizedBox(height: 80),
+                const SizedBox(height: 70),
                 buildImageWidget(i),
                 const SizedBox(height: 60),
                 buildBodyWidget(context, i),
@@ -40,15 +40,18 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
     return Image.asset(
       onBoardingList[i].image!,
       width: 200,
-      height: 300,
+      height: 250,
       fit: BoxFit.fill,
     );
   }
 
-  Text buildTitleWidget(BuildContext context, int i) {
-    return Text(
-      "${onBoardingList[i].title}",
-      style: Theme.of(context).textTheme.headline1,
+  Widget buildTitleWidget(BuildContext context, int i) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        "${onBoardingList[i].title}",
+        style: Theme.of(context).textTheme.headline1,
+      ),
     );
   }
 }

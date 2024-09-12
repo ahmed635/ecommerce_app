@@ -30,9 +30,9 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImpp> {
       onPressed: () {
         controller.next();
       },
-      child: const Text(
-        "Continue",
-        style: TextStyle(fontSize: 18),
+      child: Text(
+        "continue".tr,
+        style: const TextStyle(fontSize: 18),
       ),
     );
   }
@@ -43,9 +43,9 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImpp> {
       onPressed: () {
         controller.skip();
       },
-      child: const Text(
-        "Skip",
-        style: TextStyle(fontSize: 18),
+      child: Text(
+        "skip".tr,
+        style: const TextStyle(fontSize: 18),
       ),
     );
   }

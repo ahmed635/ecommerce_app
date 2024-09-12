@@ -77,6 +77,7 @@ dependencies:
   device_preview: ^0.7.5
   responsive_builder: ^0.4.2
   image_pickers: ^2.0.0+2
+  flutter_otp_text_field: ^1.1.1
 
 
 dev_dependencies:
@@ -122,11 +123,11 @@ flutter:
          - asset: assets/fonts/Cairo/Cairo-Bold.ttf
            weight: 700
 
-     - family: PlayfairDisplay
-       fonts:
-         - asset: assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf
-         - asset: assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf
-           weight: 700
+#     - family: PlayfairDisplay
+#       fonts:
+#         - asset: assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf
+#         - asset: assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf
+#           weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,28 +1,27 @@
-import 'package:ecommerce_app/controller/auth/login_controller.dart';
+import 'package:ecommerce_app/controller/auth/signup_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/login_or_signup_text.dart';
-import 'package:ecommerce_app/view/widgets/auth/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/auth/custom_text_form_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String routeName = "/login_screen";
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
-  const LoginScreen({super.key});
+  static const String routeName = "/sign_up_screen";
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(LoginControllerImp());
+    var controller = Get.put(SignUpControllerImpl());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white24,
         elevation: 0,
         title: Text(
-          "sign_in".tr,
+          "sign_up".tr,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -30,13 +29,9 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
         child: ListView(
           children: [
-            const LogoWidget(),
-            const SizedBox(
-              height: 15,
-            ),
             buildTitleWidget(context),
             const SizedBox(
               height: 10,
@@ -44,6 +39,15 @@ class LoginScreen extends StatelessWidget {
             buildBodyText(context),
             const SizedBox(
               height: 35,
+            ),
+            CustomTextFormField(
+              hintText: "username_description".tr,
+              labelText: "username".tr,
+              iconData: Icons.person_outlined,
+              controller: controller.username,
+            ),
+            const SizedBox(
+              height: 20,
             ),
             CustomTextFormField(
               hintText: "email_description".tr,
@@ -55,39 +59,35 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             CustomTextFormField(
+              hintText: "phone_description".tr,
+              labelText: "phone".tr,
+              iconData: Icons.phone_android_outlined,
+              controller: controller.phone,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomTextFormField(
               hintText: "password_description".tr,
               labelText: "password".tr,
               iconData: Icons.lock_outline,
               controller: controller.password,
             ),
             const SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              child: Text(
-                "forget_password".tr,
-                textAlign: TextAlign.end,
-                style: TextStyle(color: AppColor.primaryColor),
-              ),
-              onTap: () {
-                controller.navigateToForgetPassword();
-              },
-            ),
-            const SizedBox(
-              height: 10,
+              height: 15,
             ),
             CustomButton(
-              text: "sign_in".tr,
+              text: "sign_up".tr,
               onPressed: () {},
             ),
             const SizedBox(
               height: 20,
             ),
             LoginOrSignUpText(
-              textOne: "do_not_have_account".tr,
-              textTwo: "sign_up".tr,
+              textOne: "have_account".tr,
+              textTwo: "sign_in".tr,
               onTap: () {
-                controller.navigateToSignUP();
+                controller.navigateToLoginPage();
               },
             )
           ],
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25),
       child: Text(
-        "sign_in_description".tr,
+        "sign_up_description".tr,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyText2,
       ),
@@ -109,7 +109,7 @@ class LoginScreen extends StatelessWidget {
 
   Text buildTitleWidget(BuildContext context) {
     return Text(
-      "sign_in_title".tr,
+      "sign_up_title".tr,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline2,
     );

@@ -3,11 +3,10 @@ import 'package:ecommerce_app/core/localizations/change_localization.dart';
 import 'package:ecommerce_app/core/localizations/translation.dart';
 import 'package:ecommerce_app/core/services/services.dart';
 import 'package:ecommerce_app/routes.dart';
-import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'view/screens/language.dart';
+import 'view/screens/language_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +16,14 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     LocalController controller = Get.put(LocalController());
     return GetMaterialApp(
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'ecommerce_store'.tr,
       locale: controller.language,
       theme: ThemeData(
         fontFamily: "PlayfairDisplay",
@@ -39,13 +38,10 @@ class MyApp extends StatelessWidget {
               color: AppColor.grey,
               fontWeight: FontWeight.bold,
               fontSize: 18),
-          bodyText2: TextStyle(
-              height: 2,
-              color: AppColor.grey,
-              fontSize: 14),
+          bodyText2: TextStyle(height: 2, color: AppColor.grey, fontSize: 14),
         ),
       ),
-      home: const LoginScreen(),//const LanguageScreen(),
+      home: const LanguageScreen(),
       routes: routes,
     );
   }

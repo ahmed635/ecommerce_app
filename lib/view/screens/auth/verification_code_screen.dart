@@ -1,28 +1,26 @@
-import 'package:ecommerce_app/controller/auth/login_controller.dart';
+import 'package:ecommerce_app/controller/auth/verification_code_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
-import 'package:ecommerce_app/view/widgets/auth/login_or_signup_text.dart';
 import 'package:ecommerce_app/view/widgets/auth/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/auth/custom_text_form_field.dart';
+class VerificationCodeScreen extends StatelessWidget {
+  const VerificationCodeScreen({super.key});
 
-class LoginScreen extends StatelessWidget {
-  static const String routeName = "/login_screen";
-
-  const LoginScreen({super.key});
+  static const String routeName = "/verification_code_screen";
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(LoginControllerImp());
+    var controller = Get.put(VerificationCodeControllerImpl());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white24,
         elevation: 0,
         title: Text(
-          "sign_in".tr,
+          "verification_code".tr,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -30,12 +28,12 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
         child: ListView(
           children: [
             const LogoWidget(),
             const SizedBox(
-              height: 15,
+              height: 20,
             ),
             buildTitleWidget(context),
             const SizedBox(
@@ -45,49 +43,35 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
-            CustomTextFormField(
-              hintText: "email_description".tr,
-              labelText: "email".tr,
-              iconData: Icons.email_outlined,
-              controller: controller.email,
+            OtpTextField(
+              showFieldAsBox: true,
+              numberOfFields: 5,
+              fieldWidth: 50,
+              borderColor: AppColor.primaryColor,
+              borderRadius: BorderRadius.circular(10),
+              onCodeChanged: (String code) {},
+              onSubmit: (String verificationCode) {
+                controller.navigateToResetPassword();
+              },
             ),
             const SizedBox(
               height: 20,
             ),
-            CustomTextFormField(
-              hintText: "password_description".tr,
-              labelText: "password".tr,
-              iconData: Icons.lock_outline,
-              controller: controller.password,
+            CustomButton(
+              text: "verify".tr,
+              onPressed: () {},
             ),
             const SizedBox(
               height: 10,
             ),
             InkWell(
               child: Text(
-                "forget_password".tr,
-                textAlign: TextAlign.end,
-                style: TextStyle(color: AppColor.primaryColor),
+                "resend_code".tr,
+                style: TextStyle(
+                    color: AppColor.primaryColor, fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                controller.navigateToForgetPassword();
-              },
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomButton(
-              text: "sign_in".tr,
-              onPressed: () {},
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            LoginOrSignUpText(
-              textOne: "do_not_have_account".tr,
-              textTwo: "sign_up".tr,
-              onTap: () {
-                controller.navigateToSignUP();
+                controller.navigateToResetPassword();
               },
             )
           ],
@@ -100,7 +84,7 @@ class LoginScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25),
       child: Text(
-        "sign_in_description".tr,
+        "verification_code_description".tr,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyText2,
       ),
@@ -109,7 +93,7 @@ class LoginScreen extends StatelessWidget {
 
   Text buildTitleWidget(BuildContext context) {
     return Text(
-      "sign_in_title".tr,
+      "verification_code_title".tr,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline2,
     );

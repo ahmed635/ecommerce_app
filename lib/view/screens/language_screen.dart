@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class LanguageScreen extends GetView<LocalController> {
   static const String routeName = "/change_language";
+
   const LanguageScreen({super.key});
 
   @override
@@ -17,12 +18,14 @@ class LanguageScreen extends GetView<LocalController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Choose Language",
+              "choose_language".tr,
               style: Theme.of(context).textTheme.headline1,
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             CustomButtonLanguage(
-              textButton: "Arabic",
+              textButton: "ar".tr,
               onPressed: () {
                 controller.changeLang("ar");
                 Get.toNamed(OnBoardingScreen.rootName);
@@ -30,7 +33,7 @@ class LanguageScreen extends GetView<LocalController> {
             ),
             // const SizedBox(height: 10,),
             CustomButtonLanguage(
-              textButton: "English",
+              textButton: "en".tr,
               onPressed: () {
                 controller.changeLang("en");
                 Get.toNamed(OnBoardingScreen.rootName);
