@@ -3,6 +3,7 @@ import 'package:ecommerce_app/core/localizations/change_localization.dart';
 import 'package:ecommerce_app/core/localizations/translation.dart';
 import 'package:ecommerce_app/core/services/services.dart';
 import 'package:ecommerce_app/routes.dart';
+import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,14 +32,20 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
           headline1: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 22, color: AppColor.black),
+          headline2: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 26, color: AppColor.black),
           bodyText1: TextStyle(
-              height: 2.5,
+              height: 2,
               color: AppColor.grey,
               fontWeight: FontWeight.bold,
               fontSize: 18),
+          bodyText2: TextStyle(
+              height: 2,
+              color: AppColor.grey,
+              fontSize: 14),
         ),
       ),
-      home: const LanguageScreen(),
+      home: const LoginScreen(),//const LanguageScreen(),
       routes: routes,
     );
   }
