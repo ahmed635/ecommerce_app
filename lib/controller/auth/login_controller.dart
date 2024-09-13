@@ -9,16 +9,24 @@ abstract class LoginController extends GetxController {
   navigateToForgetPassword();
 
   navigateToSignUP();
+
+  toggleShowPassword();
 }
 
 class LoginControllerImp extends LoginController {
   late TextEditingController email;
   late TextEditingController password;
+  bool showPassword = true;
+  GlobalKey<FormState> key = GlobalKey<FormState>();
 
   @override
   login() {
-    // TODO: implement login
-    throw UnimplementedError();
+    var formData = key.currentState;
+    if (formData!.validate()) {
+      print("Valid");
+    } else {
+      print("Not Valid");
+    }
   }
 
   @override
@@ -43,5 +51,11 @@ class LoginControllerImp extends LoginController {
     email.dispose();
     password.dispose();
     super.dispose();
+  }
+
+  @override
+  void toggleShowPassword() {
+    showPassword = !showPassword;
+    update();
   }
 }

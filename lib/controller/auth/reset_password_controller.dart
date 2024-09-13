@@ -6,11 +6,18 @@ abstract class ResetPasswordController extends GetxController {
   checkPasswordConfirmation();
 
   navigateToLoginPage();
+
+  toggleShowConfirmPassword();
+
+  toggleShowPassword();
 }
 
 class ResetPasswordControllerImpl extends ResetPasswordController {
   late TextEditingController password;
   late TextEditingController confirmedPassword;
+  bool showPassword = true;
+  bool showConfirmPassword = true;
+  GlobalKey<FormState> key = GlobalKey<FormState>();
 
   @override
   navigateToLoginPage() {
@@ -19,8 +26,13 @@ class ResetPasswordControllerImpl extends ResetPasswordController {
 
   @override
   checkPasswordConfirmation() {
-    // TODO: implement ResetPassword
-    throw UnimplementedError();
+    var data = key.currentState;
+    if (data!.validate() && password.text == confirmedPassword.text) {
+      print("valid");
+      navigateToLoginPage();
+    } else {
+      print("Not Valid");
+    }
   }
 
   @override
@@ -35,5 +47,17 @@ class ResetPasswordControllerImpl extends ResetPasswordController {
     password.dispose();
     confirmedPassword.dispose();
     super.dispose();
+  }
+
+  @override
+  toggleShowConfirmPassword() {
+    showConfirmPassword = !showConfirmPassword;
+    update();
+  }
+
+  @override
+  toggleShowPassword() {
+    showPassword = !showPassword;
+    update();
   }
 }

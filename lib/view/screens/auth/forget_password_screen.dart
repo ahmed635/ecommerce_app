@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/controller/auth/forget_password_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
+import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
+import 'package:ecommerce_app/core/functions/valid_input.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_text_form_field.dart';
 import 'package:ecommerce_app/view/widgets/auth/logo.dart';
@@ -13,7 +15,6 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ForgetPasswordControllerImpl());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,38 +28,49 @@ class ForgetPasswordScreen extends StatelessWidget {
               .copyWith(color: AppColor.grey),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-        child: ListView(
-          children: [
-            const LogoWidget(),
-            const SizedBox(
-              height: 20,
+      body: WillPopScope(
+        onWillPop: alertExitApp,
+        child: GetBuilder<ForgetPasswordControllerImpl>(
+          builder: (controller) => Container(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
+            child: Form(
+              key: controller.key,
+              child: ListView(
+                children: [
+                  const LogoWidget(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  buildTitleWidget(context),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buildBodyText(context),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  CustomTextFormField(
+                    validator: (val) {
+                      return validInput(val, 5, 100, 'email');
+                    },
+                    hintText: "email_description".tr,
+                    labelText: "email".tr,
+                    iconData: Icons.email_outlined,
+                    controller: controller.email,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                    text: "check".tr,
+                    onPressed: () {
+                      controller.checkEmail();
+                    },
+                  )
+                ],
+              ),
             ),
-            buildTitleWidget(context),
-            const SizedBox(
-              height: 10,
-            ),
-            buildBodyText(context),
-            const SizedBox(
-              height: 35,
-            ),
-            CustomTextFormField(
-              hintText: "email_description".tr,
-              labelText: "email".tr,
-              iconData: Icons.email_outlined,
-              controller: controller.email,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomButton(
-              text: "check".tr,
-              onPressed: () {
-                controller.navigateToVerificationCode();
-              },
-            )
-          ],
+          ),
         ),
       ),
     );

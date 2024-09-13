@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/controller/auth/reset_password_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
+import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
+import 'package:ecommerce_app/core/functions/valid_input.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_text_form_field.dart';
 import 'package:ecommerce_app/view/widgets/auth/logo.dart';
@@ -13,64 +15,87 @@ class ResetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ResetPasswordControllerImpl());
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white24,
-        elevation: 0,
-        title: Text(
-          "forget_password".tr,
-          style: Theme.of(context)
-              .textTheme
-              .headline1!
-              .copyWith(color: AppColor.grey),
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white24,
+          elevation: 0,
+          title: Text(
+            "forget_password".tr,
+            style: Theme
+                .of(context)
+                .textTheme
+                .headline1!
+                .copyWith(color: AppColor.grey),
+          ),
         ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-        child: ListView(
-          children: [
-            const LogoWidget(),
-            const SizedBox(
-              height: 20,
-            ),
-            buildTitleWidget(context),
-            const SizedBox(
-              height: 10,
-            ),
-            buildBodyText(context),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextFormField(
-              hintText: "password_description".tr,
-              labelText: "password".tr,
-              iconData: Icons.lock_outline,
-              controller: controller.password,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            CustomTextFormField(
-              hintText: "confirm_password_description".tr,
-              labelText: "confirm_password".tr,
-              iconData: Icons.lock_outline,
-              controller: controller.confirmedPassword,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomButton(
-              text: "reset_password".tr,
-              onPressed: () {
-                controller.navigateToLoginPage();
-              },
-            )
-          ],
-        ),
-      ),
-    );
+        body: WillPopScope(
+          onWillPop: alertExitApp,
+          child: GetBuilder<ResetPasswordControllerImpl>(
+            builder: (controller) =>
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25, vertical: 35),
+                  child: Form(
+                    key: controller.key,
+                    child: ListView(
+                      children: [
+                        const LogoWidget(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        buildTitleWidget(context),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildBodyText(context),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomTextFormField(
+                          validator: (val) {
+                            return validInput(val, 3, 20, "password");
+                          },
+                          hintText: "password_description".tr,
+                          obscureText: controller.showPassword,
+                          onTapIcon: () {
+                            controller.toggleShowPassword();
+                          },
+                          labelText: "password".tr,
+                          iconData: Icons.lock_outline,
+                          controller: controller.password,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        CustomTextFormField(
+                          validator: (val) {
+                            return validInput(val, 3, 20, "password");
+                          },
+                          hintText: "confirm_password_description".tr,
+                          labelText: "confirm_password".tr,
+                          obscureText: controller.showConfirmPassword,
+                          onTapIcon: () {
+                            controller.toggleShowConfirmPassword();
+                          },
+                          iconData: Icons.lock_outline,
+                          controller: controller.confirmedPassword,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomButton(
+                          text: "reset_password".tr,
+                          onPressed: () {
+                            controller.checkPasswordConfirmation();
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+          ),
+        ));
   }
 
   Container buildBodyText(BuildContext context) {
@@ -79,7 +104,10 @@ class ResetPasswordScreen extends StatelessWidget {
       child: Text(
         "reset_password_description".tr,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme
+            .of(context)
+            .textTheme
+            .bodyText2,
       ),
     );
   }
@@ -88,7 +116,10 @@ class ResetPasswordScreen extends StatelessWidget {
     return Text(
       "reset_password_title".tr,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headline2,
+      style: Theme
+          .of(context)
+          .textTheme
+          .headline2,
     );
   }
 }

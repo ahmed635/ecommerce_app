@@ -6,6 +6,8 @@ abstract class SignUpController extends GetxController {
   signUp();
 
   navigateToLoginPage();
+
+  toggleShowPassword();
 }
 
 class SignUpControllerImpl extends SignUpController {
@@ -13,11 +15,18 @@ class SignUpControllerImpl extends SignUpController {
   late TextEditingController email;
   late TextEditingController password;
   late TextEditingController phone;
+  bool showPassword = true;
+  GlobalKey<FormState> key = GlobalKey<FormState>();
 
   @override
   signUp() {
-    // TODO: implement signUp
-    throw UnimplementedError();
+    var data = key.currentState;
+    if (data!.validate()) {
+      print("valid registration");
+      navigateToLoginPage();
+    } else {
+      print("Not valid registration");
+    }
   }
 
   @override
@@ -41,5 +50,11 @@ class SignUpControllerImpl extends SignUpController {
     password.dispose();
     phone.dispose();
     super.dispose();
+  }
+
+  @override
+  toggleShowPassword() {
+    showPassword = !showPassword;
+    update();
   }
 }
