@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
+import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,8 @@ abstract class LoginController extends GetxController {
   navigateToSignUP();
 
   toggleShowPassword();
+
+  navigateToHomePage();
 }
 
 class LoginControllerImp extends LoginController {
@@ -20,13 +24,37 @@ class LoginControllerImp extends LoginController {
   GlobalKey<FormState> key = GlobalKey<FormState>();
 
   @override
-  login() {
-    var formData = key.currentState;
-    if (formData!.validate()) {
-      print("Valid");
-    } else {
-      print("Not Valid");
+  login() async {
+    if (key.currentState!.validate()) {
+      key.currentState!.save();
+      try {
+        UserCredential userCredential = await signInWithEmailAndPassword();
+        User? user = userCredential.user;
+        if (user != null) {
+          await user.reload();
+          user.emailVerified ? navigateToHomePage() : notVerifiedEmailMessage();
+        }
+      } catch (e) {
+        print("Login error: $e");
+      }
     }
+  }
+
+  Future<UserCredential> signInWithEmailAndPassword() async {
+    return await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email.text,
+      password: password.text,
+    );
+  }
+
+  void notVerifiedEmailMessage() {
+    Get.snackbar(
+      "Email not verified",
+      "Please verify your email before logging in.",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.redAccent,
+      colorText: Colors.white,
+    );
   }
 
   @override
@@ -57,5 +85,10 @@ class LoginControllerImp extends LoginController {
   void toggleShowPassword() {
     showPassword = !showPassword;
     update();
+  }
+
+  @override
+  void navigateToHomePage() {
+    Get.offNamed(HomeScreen.routeName);
   }
 }

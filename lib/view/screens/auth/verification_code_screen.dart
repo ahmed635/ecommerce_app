@@ -14,6 +14,7 @@ class VerificationCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String email = Get.arguments['email'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -75,7 +76,7 @@ class VerificationCodeScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
-                    controller.navigateToResetPassword();
+                    controller.sendVerificationCode(email);
                   },
                 )
               ],

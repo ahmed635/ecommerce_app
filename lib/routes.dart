@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/verification_code_screen.dart';
@@ -14,6 +15,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   ForgetPasswordScreen.routeName: (context) => const ForgetPasswordScreen(),
   VerificationCodeScreen.routeName: (context) => const VerificationCodeScreen(),
   ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
+  HomeScreen.routeName: (context) => const HomeScreen(),
 };
 
 // List<GetPage<dynamic>> routes = [
