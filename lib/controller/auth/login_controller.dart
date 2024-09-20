@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
@@ -32,10 +33,13 @@ class LoginControllerImp extends LoginController {
         User? user = userCredential.user;
         if (user != null) {
           await user.reload();
-          user.emailVerified ? navigateToHomePage() : notVerifiedEmailMessage();
+          user.emailVerified
+              ? navigateToHomePage()
+              : MessageUtils.error("Email not verified",
+                  "Please verify your email before logging in.");
         }
       } catch (e) {
-        print("Login error: $e");
+        MessageUtils.error("Log In Failed", "$e");
       }
     }
   }
@@ -44,16 +48,6 @@ class LoginControllerImp extends LoginController {
     return await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email.text,
       password: password.text,
-    );
-  }
-
-  void notVerifiedEmailMessage() {
-    Get.snackbar(
-      "Email not verified",
-      "Please verify your email before logging in.",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.redAccent,
-      colorText: Colors.white,
     );
   }
 

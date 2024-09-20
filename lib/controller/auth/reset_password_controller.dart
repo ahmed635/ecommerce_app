@@ -1,4 +1,6 @@
+import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -26,9 +28,10 @@ class ResetPasswordControllerImpl extends ResetPasswordController {
 
   @override
   checkPasswordConfirmation() {
-    var data = key.currentState;
-    if (data!.validate() && password.text == confirmedPassword.text) {
-      print("valid");
+    if (key.currentState!.validate()) {
+      key.currentState!.save();
+      // TODO: send reset password to firebase
+      MessageUtils.success("ResetPassword", "Password is reset");
       navigateToLoginPage();
     } else {
       print("Not Valid");

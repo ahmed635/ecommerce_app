@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/controller/auth/reset_password_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
+import 'package:ecommerce_app/core/functions/confirmed_password.dart';
 import 'package:ecommerce_app/core/functions/valid_input.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_text_form_field.dart';
@@ -21,7 +22,7 @@ class ResetPasswordScreen extends StatelessWidget {
           backgroundColor: Colors.white24,
           elevation: 0,
           title: Text(
-            "forget_password".tr,
+            "reset_password".tr,
             style: Theme
                 .of(context)
                 .textTheme
@@ -70,7 +71,7 @@ class ResetPasswordScreen extends StatelessWidget {
                         ),
                         CustomTextFormField(
                           validator: (val) {
-                            return validInput(val, 3, 20, "password");
+                            return confirmedPassword(controller.password.text, val);
                           },
                           hintText: "confirm_password_description".tr,
                           labelText: "confirm_password".tr,

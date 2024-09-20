@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/verification_code_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,6 @@ abstract class ForgetPasswordController extends GetxController {
   checkEmail();
 
   navigateToVerificationCode();
-
-  emailNotRegisteredMessage();
 }
 
 class ForgetPasswordControllerImpl extends ForgetPasswordController {
@@ -28,26 +27,17 @@ class ForgetPasswordControllerImpl extends ForgetPasswordController {
       try {
         List<String> signInMethod =
             await FirebaseAuth.instance.fetchSignInMethodsForEmail(email.text);
-        if (signInMethod.isEmpty) { // error not work correctly but this for test verification code sender
+        if (signInMethod.isEmpty) {
+          // TODO:error not work correctly but this for test verification code sender
           navigateToVerificationCode();
         } else {
-          emailNotRegisteredMessage();
+          MessageUtils.error(
+              "Email Not Found", "The email ${email.text} is not registered.");
         }
       } catch (e) {
-        print("Error: $e");
+        MessageUtils.error("Error", "$e");
       }
     }
-  }
-
-  @override
-  void emailNotRegisteredMessage() {
-    Get.snackbar(
-      "Email Not Found",
-      "The email ${email.text} is not registered.",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.redAccent,
-      colorText: Colors.white,
-    );
   }
 
   @override

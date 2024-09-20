@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/controller/auth/verification_code_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
-import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -54,16 +53,9 @@ class VerificationCodeScreen extends StatelessWidget {
                   borderColor: AppColor.primaryColor,
                   borderRadius: BorderRadius.circular(10),
                   onCodeChanged: (String code) {},
-                  onSubmit: (String verificationCode) {
-                    controller.navigateToResetPassword();
+                  onSubmit: (String code) {
+                    controller.checkMatchedVerificationCode(code);
                   },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomButton(
-                  text: "verify".tr,
-                  onPressed: () {},
                 ),
                 const SizedBox(
                   height: 10,

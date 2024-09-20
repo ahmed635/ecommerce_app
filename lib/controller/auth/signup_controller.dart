@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,11 @@ import 'package:get/get.dart';
 abstract class SignUpController extends GetxController {
   signUp();
 
-  navigateToLoginPage();
+  Future<User?> createUser();
 
-  Future<void> createNewUser();
+  Future<void> sendEmailVerificationMessage(User? user);
+
+  navigateToLoginPage();
 
   toggleShowPassword();
 }
@@ -30,15 +33,10 @@ class SignUpControllerImpl extends SignUpController {
       try {
         User? user = await createUser();
         await sendEmailVerificationMessage(user);
+        MessageUtils.success("Done", "Successful Sign Up");
         navigateToLoginPage();
       } catch (e) {
-        Get.snackbar(
-          "Sign Up Failed",
-          "$e",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent,
-          colorText: Colors.white,
-        );
+        MessageUtils.error("Sign Up Failed", "$e");
       }
     }
   }
@@ -73,29 +71,13 @@ class SignUpControllerImpl extends SignUpController {
   }
 
   @override
-  Future<User?> createNewUser() async {
-    try {
-      return await createUser();
-    } catch (e) {
-      print(e);
-      Get.snackbar(
-        "Email not verified",
-        "Please verify your email before logging in.",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent,
-        colorText: Colors.white,
-      );
-    }
-    return null;
-  }
-
   Future<void> sendEmailVerificationMessage(User? user) async {
     if (user != null && !user.emailVerified) {
       await user.sendEmailVerification();
-      print("Verification email has been sent.");
     }
   }
 
+  @override
   Future<User?> createUser() async {
     UserCredential userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(
@@ -104,7 +86,7 @@ class SignUpControllerImpl extends SignUpController {
     if (user != null) {
       FirebaseFirestore.instance
           .collection("users")
-          .doc(user!.uid)
+          .doc(user.uid)
           .set({'username': username.text, 'phone': phone.text});
     }
     return user;
