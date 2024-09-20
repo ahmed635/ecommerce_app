@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "329924312088",
+    "project_id": "ecommerce-app-b893b",
+    "storage_bucket": "ecommerce-app-b893b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329924312088:android:cebbeff1d47f3fbfcb176d",
+        "android_client_info": {
+          "package_name": "com.emaple.ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDGSc1CHzolJ0B6lwTZjWJRH9K5hD3jZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329924312088:android:9a4c765c63e270adcb176d",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDGSc1CHzolJ0B6lwTZjWJRH9K5hD3jZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
