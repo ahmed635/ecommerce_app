@@ -1,0 +1,7 @@
+enum StatusRequest {
+  LOADING,
+  SUCCESS,
+  FAILURE,
+  SERVER_FAILURE,
+  OFFLINE_FAILURE,
+}

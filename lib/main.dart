@@ -22,6 +22,9 @@ Future<void> initFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // FirebaseControllerImpl firebaseController =
+  // Get.put(FirebaseControllerImpl());
+  // firebaseController.currentUserState();
 }
 
 class MyApp extends StatelessWidget {

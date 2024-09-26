@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/services/services.dart';
 import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
@@ -23,6 +24,7 @@ class LoginControllerImp extends LoginController {
   late TextEditingController password;
   bool showPassword = true;
   GlobalKey<FormState> key = GlobalKey<FormState>();
+  MyServices myServices = Get.put(MyServices());
 
   @override
   login() async {
@@ -65,6 +67,7 @@ class LoginControllerImp extends LoginController {
   void onInit() {
     email = TextEditingController();
     password = TextEditingController();
+    myServices.pref.setBool("should_not_show_on_boarding_screen", true);
     super.onInit();
   }
 

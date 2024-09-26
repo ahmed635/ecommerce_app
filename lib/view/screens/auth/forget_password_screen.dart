@@ -64,7 +64,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   CustomButton(
                     text: "check".tr,
                     onPressed: () {
-                      controller.checkEmail();
+                      controller.sendPasswordResetEmail();
                     },
                   )
                 ],
