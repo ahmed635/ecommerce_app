@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
 import 'package:ecommerce_app/core/functions/valid_input.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/login_or_signup_text.dart';
+import 'package:ecommerce_app/view/widgets/auth/sign_in_with_google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -114,7 +115,23 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () {
                       controller.navigateToLoginPage();
                     },
-                  )
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text(
+                    "OR",
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  SignInWithGoogleButton(
+                    text: "Sign up with Google",
+                    onPressed: () {
+                      controller.signUpWithGoogle();
+                    },
+                  ),
                 ],
               ),
             ),

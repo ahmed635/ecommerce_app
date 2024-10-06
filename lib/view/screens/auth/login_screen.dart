@@ -5,6 +5,7 @@ import 'package:ecommerce_app/core/functions/valid_input.dart';
 import 'package:ecommerce_app/view/widgets/auth/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/auth/login_or_signup_text.dart';
 import 'package:ecommerce_app/view/widgets/auth/logo.dart';
+import 'package:ecommerce_app/view/widgets/auth/sign_in_with_google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                     controller: controller.password,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   InkWell(
                     child: Text(
@@ -90,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   CustomButton(
                     text: "sign_in".tr,
@@ -99,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   LoginOrSignUpText(
                     textOne: "do_not_have_account".tr,
@@ -107,7 +108,21 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       controller.navigateToSignUP();
                     },
-                  )
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "OR",
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SignInWithGoogleButton(
+                    text: "Sign in with Google",
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),

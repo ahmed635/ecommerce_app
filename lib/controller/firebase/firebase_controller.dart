@@ -12,22 +12,22 @@ abstract class FirebaseController extends GetxController {
   navigateToLogin();
 }
 
-class FirebaseControllerImpl  extends FirebaseController {
+class FirebaseControllerImpl extends FirebaseController {
   MyServices myServices = Get.find();
 
   @override
   currentUserState() {
     if (myServices.pref.getBool("should_not_show_on_boarding_screen") ??
-        false){
+        false) {
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user == null) {
           navigateToLogin();
         } else {
           navigateToHome();
         }
+        print("current user $user");
       });
     }
-
   }
 
   @override

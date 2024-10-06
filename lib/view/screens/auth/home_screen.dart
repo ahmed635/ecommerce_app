@@ -1,5 +1,12 @@
-import 'package:ecommerce_app/core/constants/app_color.dart';
+import 'package:ecommerce_app/controller/auth/home_controller.dart';
+import 'package:ecommerce_app/view/widgets/home/categories_list_view.dart';
+import 'package:ecommerce_app/view/widgets/home/custom_app_bar.dart';
+import 'package:ecommerce_app/view/widgets/home/custom_offer_list_view.dart';
+import 'package:ecommerce_app/view/widgets/home/custom_offer_title.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+
+import '../../widgets/home/custom_card_offer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,22 +16,32 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white24,
-        elevation: 0,
-        title: Text(
-          "Home Screen",
-          style: Theme.of(context)
-              .textTheme
-              .headline1!
-              .copyWith(color: AppColor.grey),
-        ),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: const Text("Home screen paage"),
-      ),
+      body: GetBuilder<HomeControllerImpl>(
+          builder: (controller) => Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: ListView(
+                  children:  [
+                    CustomAppBar(
+                      title: "Search",
+                      onPressedIcon: (){},
+                      onPressedSearch: (){},
+                    ),
+                    const CustomCardOffer(
+                      offerTitle: "A Summer Surprise",
+                      offerDescription: "Cashback 20%",
+                    ),
+                    const CategoriesListView(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const CustomOfferTitle(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const CustomOfferListView()
+                  ],
+                ),
+              )),
     );
   }
 }

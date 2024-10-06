@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/services/services.dart';
+import 'package:ecommerce_app/core/utils/firebase_utils.dart';
 import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class LoginController extends GetxController {
   login();
@@ -31,7 +33,9 @@ class LoginControllerImp extends LoginController {
     if (key.currentState!.validate()) {
       key.currentState!.save();
       try {
-        UserCredential userCredential = await signInWithEmailAndPassword();
+        UserCredential userCredential =
+            await FirebaseUtils.signInWithEmailAndPassword(
+                email.text, password.text);
         User? user = userCredential.user;
         if (user != null) {
           await user.reload();
@@ -46,13 +50,6 @@ class LoginControllerImp extends LoginController {
     }
   }
 
-  Future<UserCredential> signInWithEmailAndPassword() async {
-    return await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email.text,
-      password: password.text,
-    );
-  }
-
   @override
   navigateToForgetPassword() {
     Get.toNamed(ForgetPasswordScreen.routeName);
@@ -65,6 +62,10 @@ class LoginControllerImp extends LoginController {
 
   @override
   void onInit() {
+    FirebaseMessaging.instance.getToken().then((value) {
+      String? token = value;
+      print("token: $token");
+    });
     email = TextEditingController();
     password = TextEditingController();
     myServices.pref.setBool("should_not_show_on_boarding_screen", true);
