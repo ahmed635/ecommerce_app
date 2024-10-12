@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,11 +15,17 @@ class FirebaseUtils {
   static User? createUserDetails(
       UserCredential userCredential, String username, String phone) {
     User? user = userCredential.user;
+    UserModel currentUser = UserModel(
+      id: user?.uid,
+      username: username,
+      phone: phone,
+      email: user?.email,
+    );
     if (user != null) {
       FirebaseFirestore.instance
           .collection("users")
           .doc(user.uid)
-          .set({'username': username, 'phone': phone});
+          .set(currentUser.toJson());
     }
     return user;
   }

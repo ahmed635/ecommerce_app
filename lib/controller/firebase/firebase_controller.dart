@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/core/services/services.dart';
-import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
+import 'package:ecommerce_app/view/screens/home/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';

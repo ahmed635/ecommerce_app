@@ -1,3 +1,5 @@
+import 'package:googleapis/androidpublisher/v3.dart';
+
 class ItemModel {
   String? id;
   String? nameAr;
@@ -10,7 +12,7 @@ class ItemModel {
   double? discount;
   double? tax;
   bool? active;
-  DateTime? dateTime;
+  Timestamp? dateTime;
   String? categoryId;
 
   ItemModel(
@@ -36,12 +38,12 @@ class ItemModel {
         descriptionEn: json["descriptionEn"],
         image: json["image"],
         count: json["count"],
-        price: json["price"],
-        discount: json["discount"],
-        tax: json["tax"],
+        price: double.tryParse(json["price"]),
+        discount: double.tryParse(json["discount"]),
+        tax: double.tryParse(json["tax"]),
         active: json["active"],
         categoryId: json["categoryId"],
-        dateTime: DateTime.parse(json['dateTime']),
+        dateTime: json['dateTime'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +59,6 @@ class ItemModel {
     'discount': discount,
     'active': active,
     'categoryId': categoryId,
-    'dateTime': dateTime!.toIso8601String(),
+    'dateTime': dateTime,
   };
 }

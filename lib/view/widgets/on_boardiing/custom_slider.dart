@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/controller/on_boarding_controller.dart';
+import 'package:ecommerce_app/controller/on_boarding/on_boarding_controller.dart';
 import 'package:ecommerce_app/data/data_source/static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

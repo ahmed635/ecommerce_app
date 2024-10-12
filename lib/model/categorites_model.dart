@@ -1,28 +1,25 @@
-import 'package:ecommerce_app/data/model/item_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryModel {
   String? id;
   String? nameAr;
   String? nameEn;
   String? image;
-  DateTime? dateTime;
-  List<ItemModel>? items;
+  Timestamp? dateTime;
 
   CategoryModel(
       {this.id,
       this.nameAr,
       this.nameEn,
       this.image,
-      this.dateTime,
-      this.items});
+      this.dateTime});
 
   static CategoryModel fromJson(Map<String, dynamic> json) => CategoryModel(
         id: json["id"],
         nameAr: json["nameAr"],
         nameEn: json["nameEn"],
         image: json["image"],
-        dateTime: DateTime.parse(json['dateTime']),
-        items: json["items"],
+        dateTime: json['dateTime'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -30,9 +27,6 @@ class CategoryModel {
         'nameAr': nameAr,
         'nameEn': nameEn,
         'image': image,
-        'dateTime': dateTime!.toIso8601String(),
-        'items': items!.map((element) {
-          element.toJson();
-        }),
+        'dateTime': dateTime,
       };
 }

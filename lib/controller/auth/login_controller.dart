@@ -2,7 +2,7 @@ import 'package:ecommerce_app/core/services/services.dart';
 import 'package:ecommerce_app/core/utils/firebase_utils.dart';
 import 'package:ecommerce_app/core/utils/message_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
-import 'package:ecommerce_app/view/screens/auth/home_screen.dart';
+import 'package:ecommerce_app/view/screens/home/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

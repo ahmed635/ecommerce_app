@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/controller/on_boarding_controller.dart';
+import 'package:ecommerce_app/controller/on_boarding/on_boarding_controller.dart';
 import 'package:ecommerce_app/core/functions/alert_exit_app.dart';
 import 'package:ecommerce_app/view/widgets/on_boardiing/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/on_boardiing/custom_slider.dart';

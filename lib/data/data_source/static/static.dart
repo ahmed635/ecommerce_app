@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/core/constants/app_image_assets.dart';
-import 'package:ecommerce_app/data/model/on_boarding_model.dart';
 import 'package:get/get.dart';
+
+import '../../../model/on_boarding_model.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(

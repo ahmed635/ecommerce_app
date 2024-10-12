@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/controller/auth/home_screen_controller.dart';
+import 'package:ecommerce_app/controller/home/home_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class CustomBottomAppBar extends StatelessWidget {
     return GetBuilder<HomeScreenControllerImpl>(
       builder: (controller) => BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
+        notchMargin: 7,
         child: Row(
           children: [
             ...List.generate(

@@ -1,22 +1,29 @@
-import 'package:ecommerce_app/controller/auth/home_controller.dart';
+import 'package:ecommerce_app/controller/home/home_page_controller.dart';
 import 'package:ecommerce_app/core/constants/app_color.dart';
-import 'package:ecommerce_app/core/constants/app_image_assets.dart';
-import 'package:ecommerce_app/data/model/item_model.dart';
+import 'package:ecommerce_app/model/item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomOfferListView extends GetView<HomeControllerImpl> {
+class CustomOfferListView extends GetView<HomePageControllerImpl> {
   const CustomOfferListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
-      child: ListView.builder(
-        itemCount: controller.items.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) =>
-            OfferDetailsWidget(item: controller.items[index]),
+      child: FutureBuilder(
+        future: controller.fetchItems(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          return ListView.builder(
+          itemCount: controller.items.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) =>
+              OfferDetailsWidget(item: controller.items[index]),
+        );
+        },
       ),
     );
   }
@@ -34,8 +41,8 @@ class OfferDetailsWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           margin: const EdgeInsets.all(10),
-          child: Image.asset(
-            AppImageAssets.onBoardingImageFour,
+          child: Image.network(
+            "${item?.image}",
             width: 150,
             height: 100,
             fit: BoxFit.fill,
