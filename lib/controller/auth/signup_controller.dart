@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/core/utils/firebase_utils.dart';
 import 'package:ecommerce_app/core/utils/message_utils.dart';
+import 'package:ecommerce_app/data/data_source/remote/auth/user_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +28,9 @@ class SignUpControllerImpl extends SignUpController {
     if (key.currentState!.validate()) {
       key.currentState!.save();
       try {
-        User? user = await FirebaseUtils.createUser(
+        User? user = await UserUtils.createUser(
             email.text, password.text, username.text, phone.text);
-        await FirebaseUtils.sendEmailVerificationMessage(user);
+        await UserUtils.sendEmailVerificationMessage(user);
         MessageUtils.success("Done", "Successful Sign Up");
         navigateToLoginPage();
       } catch (e) {
@@ -71,7 +71,7 @@ class SignUpControllerImpl extends SignUpController {
   @override
   void signUpWithGoogle() async {
     try {
-      User? user = await FirebaseUtils.signInWithGoogle();
+      User? user = await UserUtils.signInWithGoogle();
       print("user: $user");
     } catch (e) {}
   }

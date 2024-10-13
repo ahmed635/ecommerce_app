@@ -31,7 +31,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
         alignment: Alignment.center,
         child: Text(
           onBoardingList[i].body!,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ));
   }
@@ -50,7 +50,7 @@ class CustomSliderOnBoarding extends GetView<OnBoardingControllerImpp> {
       padding: const EdgeInsets.only(top: 20),
       child: Text(
         "${onBoardingList[i].title}",
-        style: Theme.of(context).textTheme.headline1,
+        style: Theme.of(context).textTheme.displayLarge,
       ),
     );
   }

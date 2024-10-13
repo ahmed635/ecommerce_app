@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/data/data_source/remote/firestore/firestore_utils.dart';
 import 'package:ecommerce_app/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class FirebaseUtils {
+class UserUtils {
   static Future<User?> createUser(
       String email, String password, String username, String phone) async {
     UserCredential userCredential = await FirebaseAuth.instance
@@ -12,8 +13,8 @@ class FirebaseUtils {
     return createUserDetails(userCredential, username, phone);
   }
 
-  static User? createUserDetails(
-      UserCredential userCredential, String username, String phone) {
+  static Future<User?> createUserDetails(
+      UserCredential userCredential, String username, String phone) async {
     User? user = userCredential.user;
     UserModel currentUser = UserModel(
       id: user?.uid,
@@ -22,6 +23,7 @@ class FirebaseUtils {
       email: user?.email,
     );
     if (user != null) {
+      await FirestoreUtils.addUser(currentUser);
       FirebaseFirestore.instance
           .collection("users")
           .doc(user.uid)
@@ -58,8 +60,6 @@ class FirebaseUtils {
     );
     var userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-    print("providerDate: ${userCredential.user!.providerData}");
-    print("metaData: ${userCredential.user!.metadata}");
     return createUserDetails(userCredential, "", "");
   }
 

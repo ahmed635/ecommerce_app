@@ -4,35 +4,39 @@ import 'package:ecommerce_app/model/item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomOfferListView extends GetView<HomePageControllerImpl> {
-  const CustomOfferListView({super.key});
+import '../../../data/data_source/remote/firestore/firestore_utils.dart';
+
+class ItemsListView extends GetView<HomePageControllerImpl> {
+  const ItemsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
       child: FutureBuilder(
-        future: controller.fetchItems(),
+        future: FirestoreUtils.fetchItems(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(),);
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
           return ListView.builder(
-          itemCount: controller.items.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) =>
-              OfferDetailsWidget(item: controller.items[index]),
-        );
+            itemCount: controller.items.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) =>
+                ItemWidget(item: controller.items[index]),
+          );
         },
       ),
     );
   }
 }
 
-class OfferDetailsWidget extends StatelessWidget {
-  ItemModel? item;
+class ItemWidget extends StatelessWidget {
+  final ItemModel? item;
 
-  OfferDetailsWidget({super.key, required this.item});
+  const ItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

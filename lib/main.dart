@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
       initialBinding: MyBinding(),
       home: const LanguageScreen(),
       routes: routes,
-      // getPages: routes,
     );
   }
 }

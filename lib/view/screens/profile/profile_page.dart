@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/home/profile_page_controller.dart';
-import '../../widgets/home/home_screen_title.dart';
+import '../../widgets/home/custom_title.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const HomeScreenTitle(
+                      const CustomTitle(
                         titleText: "Profile",
                       ),
                       const SizedBox(

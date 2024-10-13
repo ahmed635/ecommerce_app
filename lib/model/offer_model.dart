@@ -36,5 +36,5 @@ class OfferModel {
         "descriptionEn": descriptionEn,
         "timestamp": timestamp,
         "active": active,
-  };
+      };
 }

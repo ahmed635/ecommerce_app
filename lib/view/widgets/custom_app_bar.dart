@@ -4,7 +4,7 @@ class CustomAppBar extends StatelessWidget {
   final String? title;
   final void Function()? onPressedIcon;
   final void Function()? onPressedSearch;
-  CustomAppBar({super.key, required this.title, this.onPressedIcon, this.onPressedSearch});
+  const CustomAppBar({super.key, required this.title, this.onPressedIcon, this.onPressedSearch});
 
   @override
   Widget build(BuildContext context) {

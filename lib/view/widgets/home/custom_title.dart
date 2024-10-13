@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreenTitle extends StatelessWidget {
+class CustomTitle extends StatelessWidget {
   final String? titleText;
-  const HomeScreenTitle({super.key, required this.titleText});
+  const CustomTitle({super.key, required this.titleText});
 
   @override
   Widget build(BuildContext context) {

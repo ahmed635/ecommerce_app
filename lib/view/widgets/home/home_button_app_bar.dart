@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class HomeButtonAppBar extends StatelessWidget {
   final String? title;
   final IconData? icon;
-  void Function()? onPressed;
+  final void Function()? onPressed;
   final bool? active;
 
-  HomeButtonAppBar(
+  const HomeButtonAppBar(
       {super.key,
       required this.title,
       required this.icon,

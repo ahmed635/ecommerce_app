@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/core/services/services.dart';
-import 'package:ecommerce_app/core/utils/firebase_utils.dart';
 import 'package:ecommerce_app/core/utils/message_utils.dart';
+import 'package:ecommerce_app/data/data_source/remote/auth/user_utils.dart';
 import 'package:ecommerce_app/view/screens/auth/forget_password_screen.dart';
 import 'package:ecommerce_app/view/screens/home/home_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signup_screen.dart';
@@ -34,7 +34,7 @@ class LoginControllerImp extends LoginController {
       key.currentState!.save();
       try {
         UserCredential userCredential =
-            await FirebaseUtils.signInWithEmailAndPassword(
+            await UserUtils.signInWithEmailAndPassword(
                 email.text, password.text);
         User? user = userCredential.user;
         if (user != null) {
