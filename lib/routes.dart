@@ -24,36 +24,4 @@ Map<String, Widget Function(BuildContext)> routes = {
   AddCategoryScreen.routeName: (context) => const AddCategoryScreen(),
 };
 
-// List<GetPage<dynamic>> routes = [
-//   GetPage(
-//     name: LanguageScreen.routeName,
-//     page: () => const LanguageScreen(),
-//     middlewares: [
-//       MyMiddleWare(),
-//     ],
-//   ),
-//   GetPage(
-//     name: LoginScreen.routeName,
-//     page: () => const LoginScreen(),
-//   ),
-//   GetPage(
-//     name: SignUpScreen.routeName,
-//     page: () => const SignUpScreen(),
-//   ),
-//   GetPage(
-//     name: OnBoardingScreen.routeName,
-//     page: () => const OnBoardingScreen(),
-//   ),
-//   GetPage(
-//     name: ForgetPasswordScreen.routeName,
-//     page: () => const ForgetPasswordScreen(),
-//   ),
-//   GetPage(
-//     name: VerificationCodeScreen.routeName,
-//     page: () => const VerificationCodeScreen(),
-//   ),
-//   GetPage(
-//     name: ResetPasswordScreen.routeName,
-//     page: () => const ResetPasswordScreen(),
-//   ),
-// ];
+
